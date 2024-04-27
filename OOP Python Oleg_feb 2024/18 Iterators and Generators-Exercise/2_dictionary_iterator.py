@@ -13,3 +13,12 @@ class dictionary_iter:
             return tuple(self.dictionary.items())[self.element]
         else:
             raise StopIteration()
+# Test code
+# result = dictionary_iter({1: "1", 2: "2"})
+# for x in result:
+#     print(x)
+
+result = dictionary_iter({"name": "Peter", "age": 24})
+for x in result:
+    print(x)
+

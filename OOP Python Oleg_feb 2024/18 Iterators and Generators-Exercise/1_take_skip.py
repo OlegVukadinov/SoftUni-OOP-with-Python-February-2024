@@ -4,16 +4,27 @@ class take_skip:
         self.step = step
         self.current_number = self.step
         self.count = count
-        self.operations_count = 0
+        self.iterations = 0
 
     def __iter__(self):
         return self
 
     def __next__(self):
-        self.operations_count += 1
-        if self.operations_count <= self.count:
+        self.iterations += 1
+        if self.iterations <= self.count:
             number = self.current_number
             self.current_number += self.step
             return number - self.step
         else:
             raise StopIteration()
+
+
+# Test code
+# numbers = take_skip(2, 6)
+# for number in numbers:
+#     print(number)
+
+numbers = take_skip(10, 5)
+for number in numbers:
+    print(number)
+

@@ -19,3 +19,13 @@ class sequence_repeat:
             return self.sequence[self.index-1]
         else:
             raise StopIteration()
+# test code
+# result = sequence_repeat('abc', 5)
+# for item in result:
+#     print(item, end ='')
+
+result = sequence_repeat('I Love Python', 3)
+for item in result:
+    print(item, end ='')
+
+
