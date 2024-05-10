@@ -1,8 +1,8 @@
-def type_check(good_type):
+def type_check(expected_type):
     def decorator(function):
-        def wrapper(parameter):
-            if type(parameter) is good_type:
-                return function(parameter)
+        def wrapper(*args,**kwargs):
+            if type(*args,**kwargs) is expected_type:
+                return function(*args,**kwargs)
             return "Bad Type"
 
         return wrapper
