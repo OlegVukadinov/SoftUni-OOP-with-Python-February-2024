@@ -1,0 +1,7 @@
+
+Function add was called. Result: 71
+Function add was called. Result: 71
+Function add was called. Result: 11
+Function add was called. Result: 12
+Function add was called. Result: 12
+Function add was called. Result: 8
