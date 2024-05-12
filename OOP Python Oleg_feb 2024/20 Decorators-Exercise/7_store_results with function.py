@@ -1,5 +1,5 @@
 
-def store_results(function):
+def store_results(function):  #this is our decorator
     _FILE_NAME = "files/log.txt"
 
     def wrapper(*args, **kwargs):

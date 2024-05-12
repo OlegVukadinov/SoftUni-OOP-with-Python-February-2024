@@ -1,0 +1,3 @@
+Function add was called. Result: 8
+Function add was called. Result: 9
+Function add was called. Result: 9
