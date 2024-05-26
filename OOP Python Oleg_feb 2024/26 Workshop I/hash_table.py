@@ -1,3 +1,6 @@
+from copy import deepcopy
+
+
 class HashTable:
 
     def __init__(self):
@@ -54,6 +57,26 @@ class HashTable:
             return self.__values[index]
         except ValueError:
             return return_default_value
+
+    def sort(self):
+        copy_keys = [el for el in self.__keys if el is not None]
+        copy_values = [el for el in self.__values if el is not None]
+
+        result = list(zip(copy_keys, copy_values))
+        sorted_result = sorted(result, key=lambda t: t[0])
+        table = HashTable()
+        table._HashTable__keys = [t[0] for t in sorted_result]
+        table._HashTable__values = [t[1] for t in sorted_result]
+        table._HashTable__length = self.__length
+        diff = self.__length - self.count
+        table._HashTable__keys = table._HashTable__keys + [None] * diff
+        table._HashTable__values = table._HashTable__values + [None] * diff
+
+        return table
+
+    def sort_by_values(self):
+        # TO DO at home
+        pass
 
     def add(self, key, value):
         self.__setitem__(key, value)
