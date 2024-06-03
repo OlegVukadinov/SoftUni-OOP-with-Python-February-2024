@@ -1,5 +1,7 @@
 from collections.abc import Iterable
 
+from custom_exceptions import EmptyListException
+
 
 class CustomList():
     def __init__(self):
@@ -37,3 +39,31 @@ class CustomList():
         self.__values.insert(index, value)
         return self.__values
 
+    def pop(self):
+        if not self.__values:
+            raise EmptyListException("Can not pop from an empty list")
+
+        return self.__values.pop()
+
+    def clear(self):
+        self.__values.clear()
+
+    def index(self, value):
+        if value not in self.__values:
+           raise ValueError("Value is not in the list")
+        return self.__values.index(value)
+
+    def count(self, value):
+        return self.__values.count(value)
+
+    def reverse(self):
+        return self.__values[::-1]
+
+    def copy(self):
+        return self.__values[:]
+
+    def size(self):
+        return len(self.__values)
+
+    def add_first(self, value):
+        self.__values.insert(0, value)

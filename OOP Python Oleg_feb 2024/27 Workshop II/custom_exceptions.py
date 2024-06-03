@@ -1,0 +1,4 @@
+
+
+class EmptyListException(Exception):
+    pass
