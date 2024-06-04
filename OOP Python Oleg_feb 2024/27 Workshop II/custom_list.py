@@ -67,3 +67,24 @@ class CustomList():
 
     def add_first(self, value):
         self.__values.insert(0, value)
+
+    def dictionize(self):
+        data = {}
+        for index in range(0, len(self.__values), 2):
+            key = self.__values[index]
+
+            try:
+                value = self.__values[index + 1]
+            except IndexError:
+                value = " "
+            data[key] = value
+
+        return data
+
+    def move(self, n):
+
+        if not isinstance(n, int) or n < 0:
+            raise ValueError("Value is not a valid int")
+        self.__values = self.__values[n:] + self.__values[:n]
+
+        return self.__values
