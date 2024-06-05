@@ -402,13 +402,30 @@ class TestCustomList(TestCase):
         self.assertEqual(str(ex.exception.args[0]), "Value is not a valid int")
 
     def test_sum_empty_list_returns_0(self):
-        pass
+        self.assertEqual(self.l._CustomList__values, [])
+
+        result = self.l.sum()
+
+        self.assertEqual(result, 0)
+        self.assertEqual(self.l._CustomList__values, [])
 
     def test_sum_only_numeric(self):
-        pass
+        self.l._CustomList__values = [1, 2, 100, 5]
+        self.assertEqual(self.l._CustomList__values, [1, 2, 100, 5])
+
+        result = self.l.sum()
+
+        self.assertEqual(self.l._CustomList__values, [1, 2, 100, 5])
+        self.assertIs(result, 108)
 
     def test_sum_non_numeric(self):
-        pass
+        self.l._CustomList__values = [1, 2, 100, 5, "asd", (1, 2), [1, 2, 3], {"1": 3}]
+        self.assertEqual(self.l._CustomList__values, [1, 2, 100, 5])
+
+        result = self.l.sum()
+
+        self.assertEqual(self.l._CustomList__values, [1, 2, 100, 5])
+        self.assertIs(result, 117)
 
 
 if __name__ == "__main__":

@@ -88,3 +88,15 @@ class CustomList():
         self.__values = self.__values[n:] + self.__values[:n]
 
         return self.__values
+
+    def sum(self):
+        total = 0
+
+        for el in self.__values:
+            if isinstance(el, Iterable):
+                total += len(el)
+            else:
+                total += el
+
+        return total
+
