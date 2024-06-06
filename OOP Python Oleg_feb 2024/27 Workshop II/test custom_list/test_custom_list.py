@@ -49,7 +49,7 @@ class TestCustomList(TestCase):
         invalid_value = -1
         with self.assertRaises(ValueError) as ex:
             self.l.remove(invalid_value)
-        self.assertEqual(str(ex.exception.args[0]), "Integer must be 0 or positive")
+        self.assertEqual(str(ex.exception), "Integer must be 0 or positive")
 
     def test_index_is_not_in_array_boundary_raises(self):
         self.l._CustomList__values = [1, 2, 3]
@@ -60,7 +60,7 @@ class TestCustomList(TestCase):
         for index in index_out_of_range:
             with self.assertRaises(ValueError) as ex:
                 self.l.remove(index)
-            self.assertEqual(str(ex.exception.args[0]), "Index is out of range")
+            self.assertEqual(str(ex.exception), "Index is out of range")
 
     def test_remove_value_on_given_index(self):
         self.l._CustomList__values = [1, 2, 3, 1]
@@ -79,13 +79,13 @@ class TestCustomList(TestCase):
         for invalid_arg in invalid_args:
             with self.assertRaises(TypeError) as ex:
                 self.l.get(invalid_arg)
-            self.assertEqual(str(ex.exception.args[0]), f"Index must be of type integer")
+            self.assertEqual(str(ex.exception), f"Index must be of type integer")
 
     def test_get_check_index_argument_is_not_positive_or_zero_integer_raises(self):
         invalid_value = -1
         with self.assertRaises(ValueError) as ex:
             self.l.get(invalid_value)
-        self.assertEqual(str(ex.exception.args[0]), "Integer must be 0 or positive")
+        self.assertEqual(str(ex.exception), "Integer must be 0 or positive")
 
     def test_get_index_is_not_in_array_boundary(self):
         self.l._CustomList__values = [1, 2, 3]
@@ -96,7 +96,7 @@ class TestCustomList(TestCase):
         for index in index_out_of_range:
             with self.assertRaises(ValueError) as ex:
                 self.l.get(index)
-            self.assertEqual(str(ex.exception.args[0]), "Index is out of range")
+            self.assertEqual(str(ex.exception), "Index is out of range")
 
     def test_get_valid_index_returns_the_element(self):
         self.l._CustomList__values = [1, 2, 3, 1]
@@ -113,7 +113,7 @@ class TestCustomList(TestCase):
         for invalid in invalid_values:
             with self.assertRaises(ValueError) as ex:
                 self.l.extend(invalid)
-            self.assertEqual(str(ex.exception.args[0]), "Value is not an iterable")
+            self.assertEqual(str(ex.exception), "Value is not an iterable")
 
         self.assertEqual(self.l._CustomList__values, [1, 2, 3])
 
@@ -132,13 +132,13 @@ class TestCustomList(TestCase):
         for invalid_arg in invalid_args:
             with self.assertRaises(TypeError) as ex:
                 self.l.insert(invalid_arg, 5)
-            self.assertEqual(str(ex.exception.args[0]), f"Index must be of type integer")
+            self.assertEqual(str(ex.exception), f"Index must be of type integer")
 
     def test_insert_check_index_argument_is_not_positive_or_zero_integer_raises(self):
         invalid_value = -1
         with self.assertRaises(ValueError) as ex:
             self.l.insert(invalid_value, 5)
-        self.assertEqual(str(ex.exception.args[0]), "Integer must be 0 or positive")
+        self.assertEqual(str(ex.exception), "Integer must be 0 or positive")
 
     def test_insert_index_is_not_in_array_boundary_raises(self):
         self.l._CustomList__values = [1, 2, 3]
@@ -149,7 +149,7 @@ class TestCustomList(TestCase):
         for index in index_out_of_range:
             with self.assertRaises(ValueError) as ex:
                 self.l.insert(index, 5)
-            self.assertEqual(str(ex.exception.args[0]), "Index is out of range")
+            self.assertEqual(str(ex.exception), "Index is out of range")
 
     def test_insert_adds_value_on_correct_index(self):
         self.l._CustomList__values = [1, 2, 3]
@@ -169,7 +169,7 @@ class TestCustomList(TestCase):
         with self.assertRaises(EmptyListException) as ex:
             self.l.pop()
 
-        self.assertEqual(str(ex.exception.args[0]), "Can not pop from an empty list")
+        self.assertEqual(str(ex.exception), "Can not pop from an empty list")
 
     def test_pop_last_element_leaves_list_empty(self):
         self.l._CustomList__values = [100]
@@ -208,7 +208,7 @@ class TestCustomList(TestCase):
 
         with self.assertRaises(ValueError) as ex:
             self.l.index(3)
-        self.assertEqual(str(ex.exception.args[0]), "Value is not in the list")
+        self.assertEqual(str(ex.exception), "Value is not in the list")
 
     def test_index_returns_first_occurrence_of_the_value(self):
         self.l._CustomList__values = [100, 1, 2, 100]
@@ -395,11 +395,11 @@ class TestCustomList(TestCase):
         for arg in invalid_args:
             with self.assertRaises(ValueError) as ex:
                 self.l.move(arg)
-            self.assertEqual(str(ex.exception.args[0]), "Value is not a valid int")
+            self.assertEqual(str(ex.exception), "Value is not a valid int")
 
         with self.assertRaises(ValueError) as ex:
             self.l.move(-1)
-        self.assertEqual(str(ex.exception.args[0]), "Value is not a valid int")
+        self.assertEqual(str(ex.exception), "Value is not a valid int")
 
     def test_sum_empty_list_returns_0(self):
         self.assertEqual(self.l._CustomList__values, [])
