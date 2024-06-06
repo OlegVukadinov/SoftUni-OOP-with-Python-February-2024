@@ -100,3 +100,36 @@ class CustomList():
 
         return total
 
+    def overbound(self):
+        max_value = float('-inf')
+        max_value_index = None
+
+        for index in range(0, len(self.__values)):
+            current_element = self.__values[index]
+
+            if isinstance(current_element, Iterable):
+                current_element = len(current_element)
+
+            if max_value < current_element:
+                max_value = current_element
+                max_value_index = index
+
+        return max_value_index
+
+    def underbound(self):
+        min_value = float('inf')
+        min_value_index = None
+
+        for index in range(0, len(self.__values)):
+            current_element = self.__values[index]
+
+            if isinstance(current_element, Iterable):
+                current_element = len(current_element)
+
+            if min_value > current_element:
+                min_value = current_element
+                min_value_index = index
+
+        return min_value_index
+
+

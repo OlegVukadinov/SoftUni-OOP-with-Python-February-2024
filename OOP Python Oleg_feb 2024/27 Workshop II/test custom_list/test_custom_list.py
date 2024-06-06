@@ -418,15 +418,68 @@ class TestCustomList(TestCase):
         self.assertEqual(self.l._CustomList__values, [1, 2, 100, 5])
         self.assertIs(result, 108)
 
-    def test_sum_non_numeric(self):
+    def test_sum_non_numeric_returns_lens_amount(self):
         self.l._CustomList__values = [1, 2, 100, 5, "asd", (1, 2), [1, 2, 3], {"1": 3}]
-        self.assertEqual(self.l._CustomList__values, [1, 2, 100, 5])
+        self.assertEqual(self.l._CustomList__values, [1, 2, 100, 5, "asd", (1, 2), [1, 2, 3], {"1": 3}])
 
         result = self.l.sum()
 
-        self.assertEqual(self.l._CustomList__values, [1, 2, 100, 5])
+        self.assertEqual(self.l._CustomList__values, [1, 2, 100, 5, "asd", (1, 2), [1, 2, 3], {"1": 3}])
         self.assertIs(result, 117)
 
+    def test_overbound_empty_list(self):
+        self.assertEqual(self.l._CustomList__values, [])
+
+        result = self.l.overbound()
+
+        self.assertIsNone(result)
+        self.assertEqual(self.l._CustomList__values, [])
+
+    def test_overbound_only_numeric(self):
+        self.l._CustomList__values = [100, 2, 100, 5]
+        self.assertEqual(self.l._CustomList__values, [100, 2, 100, 5])
+
+        result = self.l.overbound()
+
+        self.assertEqual(self.l._CustomList__values, [100, 2, 100, 5])
+        self.assertEqual(result, 0)
+
+
+    def test_overbound_numeric_and_iterables(self):
+        self.l._CustomList__values = [1, 2, "asd", (1, 2), [1, 2, 3], {"1": 3}]
+        self.assertEqual(self.l._CustomList__values, [1, 2, "asd", (1, 2), [1, 2, 3], {"1": 3}])
+
+        result = self.l.overbound()
+
+        self.assertEqual(self.l._CustomList__values, [1, 2, "asd", (1, 2), [1, 2, 3], {"1": 3}])
+        self.assertEqual(result, 2)
+
+    def test_underbound_empty_list(self):
+        self.assertEqual(self.l._CustomList__values, [])
+
+        result = self.l.underbound()
+
+        self.assertIsNone(result)
+        self.assertEqual(self.l._CustomList__values, [])
+
+    def test_underbound_only_numeric(self):
+        self.l._CustomList__values = [2, 100, 2, 5]
+        self.assertEqual(self.l._CustomList__values, [2, 100, 2, 5])
+
+        result = self.l.underbound()
+
+        self.assertEqual(self.l._CustomList__values, [2, 100, 2, 5])
+        self.assertEqual(result, 0)
+
+
+    def test_underbound_numeric_and_iterables(self):
+        self.l._CustomList__values = [5, 6, "asd", (1, 2), [1, 2, 3], {"1": 3}]
+        self.assertEqual(self.l._CustomList__values, [5, 6, "asd", (1, 2), [1, 2, 3], {"1": 3}])
+
+        result = self.l.underbound()
+
+        self.assertEqual(self.l._CustomList__values, [5, 6, "asd", (1, 2), [1, 2, 3], {"1": 3}])
+        self.assertEqual(result, 5)
 
 if __name__ == "__main__":
     main()
